@@ -1,0 +1,226 @@
+---
+title: "the trend of vaccination in Scotland over time"
+subtitle: <font size='6'>based on different age and gender groups</font>
+author: <font size='8'>IDS No.1 <br> Bryson_Jiang, JunnanOuyang, s2232588</font>
+institute: <font size='10'>University of Edinburgh</font>
+date: <font size = '6'>`r Sys.Date()`</font>
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+---
+
+```{r load-packages, include = FALSE}
+# Add any additional packages you need to this chunk
+library(rmarkdown)
+library(tidyverse)
+library(tidymodels)
+library(palmerpenguins)
+library(knitr)
+library(revealjs)
+library(lubridate)
+```
+
+```{r setup, include=FALSE}
+# For better figure resolution
+knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
+```
+
+```{r load-data, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(broom)
+library(readr)
+age_group_and_sex <- read_csv("../../data/Daily Trend of Vaccinations by Age Group and Sex.csv")
+```
+
+## the trend of vaccination in Scotland over time in different gender and age groups. {data-background-image="img/Vaccination.jpg"}
+
+
+
+# Dataset we are using{data-background-image="img/background2.jpg"}
+The data is from The Scottish Health and Social Care Open Data Platform which is managed by Public Health Scotland. There are several variables in this data set, such as Date, country, sex, Age group, Population, Dose, Number Vaccinated, Percent Coverage, Cumulative Number Vaccinated, Cumulative percent Coverage. 
+
+## Plot : Number of Vaccination in Scotland in different stages in 2021
+
+```{r recode-species, echo = FALSE}
+# In this chunk I'm doing a bunch of analysis that I don't want to present 
+# in my slides. But I need the resulting data frame for a plot I want to present.
+```
+
+```{r plot-iris, echo = FALSE}
+# Code hidden with echo = FALSE
+# Uses modified iris dataset from previous chunk
+# Play around with height and width until you're happy with the look
+# theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex == "Female") %>%
+  ggplot(aes( x = truedate, y = NumberVaccinated, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup)+
+  
+    labs(
+    title = "Number of Vaccination in Scotland(Female) in different stages in 2021",
+    subtitle = "By age groups",
+    x = "Date",
+    y = "Number Vaccinated"
+      )
+  
+
+```
+
+---
+
+``` {r plot-iris-2, echo = FALSE}
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex == "Male") %>%
+  ggplot(aes( x = truedate, y = NumberVaccinated, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup)+
+  
+    labs(
+    title = "Number of Vaccination in Scotland(Male) in different stages in 2021",
+    subtitle = "By age groups",
+    x = "Date",
+    y = "Number Vaccinated"
+      )
+```
+
+## Plot : Percent Coverage of Vaccination in Scotland in different stages in 2021
+
+``` {r plot-iris-3, echo = FALSE}
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex == "Female") %>%
+  ggplot(aes( x = truedate, y = PercentCoverage, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup)+
+  
+    labs(
+    title = "Percent Coverage of Vaccination in Scotland(Female) in different stages in 2021",
+    subtitle = "By age groups",
+    x = "Date",
+    y = "Percent Coverage"
+      )
+```
+
+---
+
+``` {r plot-iris-4, echo = FALSE}
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex == "Male") %>%
+  ggplot(aes( x = truedate, y = PercentCoverage, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup)+
+  
+    labs(
+    title = "Percent Coverage of Vaccination in Scotland(Male) in different stages in 2021",
+    subtitle = "By age groups",
+    x = "Date",
+    y = "Percent Coverage"
+      )
+```
+
+## Plot : Cumulative Percentage Coverage of Vaccination in Scotland in 2021
+
+```{r plot-iris-5, echo = FALSE}
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex %in% c("Female")) %>%
+  ggplot(aes(x = truedate, y = CumulativePercentCoverage, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup) +
+    labs(
+    title = "Cumulative Percentage Coverage of Vaccination in Scotland(Female) in 2021",
+    subtitle = "By age group",
+    x = "Date",
+    y = "Cumulative percentage change"
+      )
+```
+
+---
+
+```{r plot-iris-6, echo = FALSE}
+
+age_group_and_sex %>%
+  mutate(truedate = ymd(Date)) %>%
+  filter(Sex %in% c("Male")) %>%
+  ggplot(aes(x = truedate, y = CumulativePercentCoverage, color = Dose)) +
+  geom_line() +
+  facet_wrap(~AgeGroup) +
+    labs(
+    title = "Cumulative Percentage Coverage of Vaccination in Scotland(Male) in 2021",
+    subtitle = "By age group",
+    x = "Date",
+    y = "Cumulative percentage change"
+      )
+```
+
+
+# The End of Our Presentation{data-background-image="img/background2.jpg"}
+Presented by Bryson_Jiang, JunnanOuyang, s2232588 
+
+## Plot and text
+
+::: columns
+:::: column
+* Some text
+* goes here
+::::
+
+:::: column
+```{r plot-vaccinations, warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
+# see how I changed out.width and fig.width from defaults
+# to make the figure bigger
+```
+::::
+:::
+
+## Different widths
+
+::: columns
+:::: {.column width="40%"}
+* Some text
+* goes here
+::::
+
+:::: {.column width="60%"}
+```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
+# see how I changed out.width and fig.width from defaults
+# to make the figure bigger
+ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+::::
+:::
+
+# Images
+
+```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
+```
+
+Or you can also include a full page image. See next slide.
+
+## {data-background-image="https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"}
+
+# Math Expressions
+
+You can write LaTeX math expressions inside a pair of dollar signs (\$...\$), e.g. $\alpha+\beta$. You can use the display style with double dollar signs:
+
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+
+# Feeling adventurous?
+
+You can learn more about the options available at the following pages:
+
+- https://github.com/rstudio/revealjs
+
+- https://bookdown.org/yihui/rmarkdown/revealjs.html
+
+- http://www.jenniferbradham.org/post/reveal_js_markdown/
+
+- https://revealjs.com/

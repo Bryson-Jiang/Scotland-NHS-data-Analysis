@@ -1,0 +1,70 @@
+---
+title: "Project proposal"
+author: "IDS no.1"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(broom)
+library(readr)
+total_vaccinations <- read_csv("../data/Daily Trend of Total Vaccinations in Scotland.csv")
+age_group_and_sex <- read_csv("../data/Daily Trend of Vaccinations by Age Group and Sex.csv")
+glimpse(total_vaccinations)
+glimpse(age_group_and_sex)
+```
+
+## 1. Introduction
+Our general question is to investigate the trend of vaccination in Scotland over time from multiple groups of people and perspectives. We will mainly use one data set which is "Daily Trend of Vaccinations by Age Group and Sex". The data is from The Scottish Health and Social Care Open Data Platform which is managed by Public Health Scotland. There are several variables in this data set, such as Date, country, sex, Age group, Population, Dose, Number Vaccinated, Percent Coverage, Cumulative Number Vaccinated, Cumulative percent Coverage. In short, this data set has 19 columns(variables) and 26628 rows (observations). 
+
+Link:https://www.opendata.nhs.scot/dataset/covid-19-vaccination-in-scotland/resource/9b99e278-b8d8-47df-8d7a-a8cf98519ac1
+
+ These are some explanation for some important variables.
+
+- `Date`: Date on which vaccination occurred.
+- `Country`: 9-digit country code for Scotland.
+- `Sex`: Sex of individual.
+- `SexQF`: Qualifier for Sex. 
+- `Agegroup`: Age group of individual. COVID-19 vaccines are not routinely recommended for children and young people under 16 years of age so this age group is not included in the table. 
+- `AgeGroupQF`: Qualifier for AgeGroup
+- `Population`: Number of individuals in the cohort.
+- `PopulationQF`: Qualifier for population.
+- `Dose`: A 2-dose schedule is advised for all vaccine types in the current vaccination programme. Total includes both Dose 1 and Dose 2 vaccines administered.
+- `DoseQF`: Qualifier for Dose.
+- `NumberVaccinated`: Number of individuals who have received the vaccine
+- `NumberVaccinatedQF`: Qualifier for NumberVaccinated
+- `PercentCoverage`: Percentage of cohort having received vaccination. Percent coverage is calculated using the NRS Scotland 2020 mid-year population estimates by age and sex.
+- `PercentCoverageQF`: Qualifier for PercentCoverage
+- `CumulativeNumberVaccinated`: Cumulative number of individuals who have received the vaccine.
+- `CumulativeNumberVaccinatedQF`: Qualifier for CumulativeNumberVaccinated
+- `CumulativePercentCoverage`: Cumulative percentage of cohor having received vaccination. Percent coverage is calculated using the NRS Scotland 2020 mid-year populations by age and sex.
+- `CumulativePercentCoverageQF`: Qualifier for CumulativePercentCoverage
+
+## 2. Data
+```{r load-packages-2, message = FALSE}
+total_vaccinations <- read_csv("../data/Daily Trend of Total Vaccinations in Scotland.csv")
+age_group_and_sex <- read_csv("../data/Daily Trend of Vaccinations by Age Group and Sex.csv")
+glimpse(total_vaccinations)
+glimpse(age_group_and_sex)
+```
+
+
+## 3. Data analysis plan
+<<<<<<< HEAD
+In order to have a specific data analysis plan, we had defined the outcome (Trend of total vaccinations) and the predictor (Age group and sex) for our research questions. We plan to tidying the data set firstly, which could provide us a clear view of what data is telling us about. 
+
+After that, some plots will be drawn in order to assist our research. For instance, we will draw a violin plot associate with the different age group and total vaccinations. And that violin graph will reveals the trend of vaccinations which we are interested. We will also calculate correlation coefficient to figure out whether sex is associate with the number of vaccinations or not.
+=======
+Data analysis demonstrates the relationship or trend of data. We will plan to use different visualizations to deal with the variables we interested. As shown above, we have planed to use tidyverse and ggplot to draw plots which will improve the visualization of data. If we will use more tools in the future of analysis, we will add that tools into our plan.
+
+In order to have a specific data analysis plan, we had defined the outcome (Trend of total vaccinations) and the predictor (Age group and sex) for our research questions. We plan to tidying the dataset firstly, which could provide us a clear view of what data is telling us about. 
+
+After that, some plots will be drawn in order to assist our research. For instance, we will draw a violin plot associate with the different age group and total vaccinations. And that violin graph will reveals the distribution of vaccinations among different age groups. For the variables which have both x and y, we will draw a line plot to visualized. Because we have different age group, we are going to colored the different age group with different color. Comparison between color could provide more information about the data.
+
+Moreover, for the data only valid in plotting scatter points, we plan to have a linear regression line of our plot which can reveal the relationship between the points. We will also calculate correlation coefficient to figure out whether sex is associate with the number of vaccinations or not.
+>>>>>>> 3e9b0a65ead8ff9bee2c8d278609a5247b693489
+
+
+
+
